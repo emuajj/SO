@@ -8,8 +8,16 @@ int main (int argc, char * argv[])
     int *a,i,j,tmp,n;
     
     sprintf(msg,"Introdueix el num d'elements a l'array: \n");
-    scanf("%d", &n);
+    write(1,msg,strlen(msg));
     sprintf(msg,"Introdueix un element de l'array: \n");
+    write(1,msg,strlen(msg));
+    for(i=0; i<n; i++)
+    {
+        for(j=0; j<n; j++)
+        {
+            scanf("%d", &n);
+        }
+    }
     for(i=0; i<n; i++)
     {
         for(j=0; j<n; j++)
@@ -25,29 +33,16 @@ int main (int argc, char * argv[])
         tmp = *(a+i);
         *(a+i) = *(a+j);
     }
-    
 
-    sprintf(msg," a[%d]=%d: \n", i, *(a+i) );
-    write(1,msg,strlen(msg));
-    
 
     for(i=0; i<n; i++)
     {
-        for(i=0; i<n; i++)
+        for(j=0; j<n; j++)
         {
-           
-            
-            
-        }
-        
-    }
+            sprintf(msg," a[%d]=%d: \n", i, *(a+i) );
+            write(1,msg,strlen(msg));
 
-    for(j=0; j<n; j++)
-    {
+        } 
     }
-
-    
-    write(1,msg,strlen(msg));
-    write(1,msg,strlen(msg));
     exit(0);
 }
