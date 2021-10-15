@@ -1,51 +1,36 @@
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
  
 
 typedef struct {
 float x;
 float y;
-} points ;
+} point ;
 
-double cal_distance(double d_x1, double d_x2, double d_y1, double d_y2)
-{
-	return sqrt(pow(d_x2 - d_x1,2)+pow(d_y2 - d_y1,2));
-}
+typedef struct {
+	point inici;
+	point final;
+} line;
 
-
- 
-float dist( points A, points B) {
-    
-
-
-
-	char map[20][79];
-
-	map[(int)A.y][(int)B.x] = 'A';
-	map[(int)A.y][(int)B.x] = 'B';
-
-	double distance = 0;
-
-	distance = cal_distance( A.x , B.x , A.y , B.y );
-    
-return(distance);
+float dist( line L ) {
+return(sqrt((L.inici.x- L.final.x)*(L.inici.x - L.final.x) + (L.inici.y - L.final.y)*(L.inici.y - L.final.y)));
 }
  
 int main(){
  
-float d;
-points A, B;
+line l;
  
 
 printf("The coordinates of the point A are: ");
-scanf("%f %f",&A.x,&A.y);
+scanf("%f %f",&l.inici.x,&l.inici.y);
  
 
 printf("\nThe coordinates of the point B are: ");
-scanf("%f %f",&B.x,&B.y);
+scanf("%f %f",&l.final.x,&l.final.y);
  
 
-printf("\nThe distance between A and B is %f\n", dist(A,B));
+printf("\nThe distance between A and B is %f\n", dist(l));
  
 exit (0);
 }

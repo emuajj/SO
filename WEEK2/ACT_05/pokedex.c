@@ -20,13 +20,13 @@ while (fgets(buf, 100, f) != NULL) {
     int id = atoi(info);
     printf("%d ", id);
 
-    info = strtok(buf, ",");
+    info = strtok(NULL, ",");
     char *name = info;
     printf("%s ", name);
-    info = strtok(buf, ",");
+    info = strtok(NULL, ",");
     double height = atof(info);
     printf("%lf ", height);
-    info = strtok(buf, ",");
+    info = strtok(NULL, ",");
     double weight = atof(info);
     printf("%lf \n" ,weight);
     Pokemon p = new_pokemon(id, name, height, weight);
@@ -43,7 +43,9 @@ return EXIT_SUCCESS;
 int add_pokemon(int id, char *name, double weight, double height){
     new_pokemon(id, name, weight, height);
 
-
+    FILE* f = fopen("./pokedex.csv", "a"); 
+    fprintf(f,"%d,%s,%lf,%lf\n",id,name,weight,height);
+    fclose(f);
 
 return EXIT_SUCCESS;
 }
