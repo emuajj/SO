@@ -11,7 +11,7 @@ double height;
 double weight;
 };
 
-Pokemon create_pokemon()
+/*Pokemon create_pokemon()
 {
     FILE* f = fopen("./pokedex.csv", "w");
     Pokemon newP;
@@ -37,7 +37,7 @@ Pokemon create_pokemon()
     sprintf(f, newP.pokemon_weight(),strlen(newP.pokemon_weight()));
     sprintf(f, "\n");
 }
-
+*/
 
 Pokemon new_pokemon(int pokemon_id, char *name, double height,double weight)
 {  
