@@ -5,7 +5,8 @@
 #include <sys/wait.h>
 #include <signal.h>
 #include <errno.h>
-//#include "pokemon.h"
+#include "pokedex/pokedex.h"
+
  
 #define KNRM "\x1B[0m"
 #define KRED "\x1B[31m"
@@ -17,9 +18,16 @@
 #define KWHT "\x1B[37m"
  
 char *args[] = {"pokemon", "pokemon", NULL};
- 
+
+int getRandom()
+{
+    return rand()%152;
+}
+
 int main(int arc, char *arv[])
 {
+init_pokedex(); 
+   
 int endFlag=1;
  
 while (endFlag == 1) 
@@ -41,11 +49,15 @@ while (endFlag == 1)
 
 
         case 'E':
-        ;
+        printf("%sAsh:[%d]--->Wild pokemon has appeared%s\n",KBLU,getpid(),KNRM);
+        printf("%s",KCYN);
+        srand(getpid());
+        show_pokemon(getRandom());
+        printf("%s",KNRM);
         int fill = fork();
         if( fill == 0)
         {
-            execv("./pokemon"); 
+            execv("./pokemon", args); 
         }
         else if ( fill > 0 )
         {
@@ -53,34 +65,45 @@ while (endFlag == 1)
             int bucle = 0;
             while(bucle == 0)
             {
-                printf("################\n #P: Throw Pokeball, B:Throw Berry, R:Run# \n################\n");
-                scanf("%c",&choice2);
-                siwtch(choice2);
+                printf("################\n P: Throw Pokeball, B:Throw Berry, R:Run \n################\n");
+                scanf(" %c",&choice2);
+                printf("%c",choice2);
+                switch (choice2)
                 {
                     case 'P':
-                    kill(getpid(),SIGUSR1);
+                    kill(fill,SIGUSR1);
                     break;
-                    case 'B':
-
-                    break;
+                    /*case 'B':
+                    break;*/
                     case 'R':
-                    kill(getpid(),SIGINT);
+                    kill(fill,SIGINT);
+                    bucle++;
                     break;
-                    
+
+                    default:
+                    perror("!!!!Invalid option. Try again.\n");
+                    scanf("%c",&choice2);
+
                 }
-                wait(&status);
+                waitpid(fill,&status,WUNTRACED);
                 if(WEXITSTATUS(status) == 7)
                 {
                     bucle++;
-                    printf("Pokemon has been captured!\n");
+                    sprintf(s, "%s!!!!Pokemon escaped! %s\n", KYEL, KNRM);
+                    printf("%s",s);
                 }
-                else if(WEXITSTATUS(status == 2))
+                else if(WEXITSTATUS(status) == 2)
                 {
                     bucle++;
-                    printf("Pokemon escaped!\n"); 
+                    printf("Pokemon has been captured!\n"); 
                 }
+                else{
+                    kill(fill, SIGCONT);
+                }
+
             }
         }
+        //wait(NULL);       
         break;
 
         default:

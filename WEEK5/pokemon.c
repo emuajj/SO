@@ -7,8 +7,9 @@
 #define RUNNINGDIR "./" 
 #define LOGFILE RUNNINGDIR "log.txt"
 
-enum accions {pokemonEscaped = 7,pokemonCaptured = 2};
-   
+enum accions {pokemonEscaped = 7,pokemonCaptured = 2, AshEscaped=0};
+char msg[100];
+
 
 void logger(char* missatge)
 {
@@ -23,40 +24,53 @@ void logger(char* missatge)
 
 int getRandom()
 {
-    srand(getpid());
     return rand()%10;
 }
 
 void tractament()
 {
     
-    char log[100];
+   
     int num = getRandom();
 
-    if(num == pokemonEscaped)
+    if(num == pokemonEscaped)//casos de if
     {
+        sprintf(msg,"S'ha generat el numero %d i per tant fem exit(%d)\n", num, pokemonEscaped);
+        logger(msg);
         exit(pokemonEscaped);
+        
+    }
+    if(num == pokemonCaptured)
+    {
+        sprintf(msg,"S'ha generat el numero %d i per tant fem exit(%d)\n", num, pokemonCaptured);
+        logger(msg);
+        exit(pokemonCaptured); 
+    }
+    else
+    {
+        sprintf(msg,"S'ha generat el numero %d i per tant ens enviem un SIGSTOP -> envia un SIGCHLD al pare\n", num);
+        logger(msg);
+        kill(getpid(),SIGSTOP);//fill debloquetja el pare SIGCHLD
     }
     
 }
-void tractament2()
-{
-    int num = getRandom();
 
-    if(num == pokemonCaptured)
-    {
-        exit(pokemonCaptured);
-    }
-} 
+void acabar_process(){
+    sprintf(msg,"El proces pokemon [%d] i acabarem amb un exit(%d)\n", getpid(), AshEscaped);
+    logger(msg);
+    exit(AshEscaped);
+}
 
 
 int main()
 {
+    int num;
     signal(SIGUSR1,tractament);
-    signal(SIGUSR2,tractament2);
-    signal(SIGINT,SIG_IGN);
+    signal(SIGINT,acabar_process);
     srand(getpid());
     while(1)
     {     
     }
+
+    
 }
