@@ -71,7 +71,7 @@ int show_pokemon(int pos){
     printf("spAttack: %d |", pokemon_spAttack(p));
     printf("spDefense: %d \n", pokemon_spDefense(p));
     printf("speed: %d \n", pokemon_speed(p));
-    printf("Generation: %d |", pokemon_generation(p));
+    printf("Generation: %d \n", pokemon_generation(p));
     //printf("Legendary: %d \n", pokemon_legendary(p));
     printf("@@@@@@@@@@@@@@\n");
 
