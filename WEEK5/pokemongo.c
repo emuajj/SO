@@ -39,7 +39,10 @@ while (endFlag == 1)
     sprintf(s, "################\n# E. Explore \n# Q. Quit\n################\n");
     if (write(1, s, strlen(s)) < 0) perror("Error writting the menu");
     scanf(" %c", &choice);
- 
+    int arrayBerry[4] = {2,2,2,2};
+    int i = 0;
+    int a = 0;
+    
 
     switch (choice) 
     {
@@ -67,14 +70,20 @@ while (endFlag == 1)
             {
                 printf("################\n P: Throw Pokeball, B:Throw Berry, R:Run \n################\n");
                 scanf(" %c",&choice2);
-                printf("%c",choice2);
+                //printf("%c",choice2);
                 switch (choice2)
                 {
                     case 'P':
                     kill(fill,SIGUSR1);
                     break;
-                    /*case 'B':
-                    break;*/
+                    case 'B':
+                    if(i < 2)
+                    {
+                        arrayBerry[i+1] = arrayBerry[i]*2;
+                        i++;
+                    }
+                    kill(fill,SIGUSR1);
+                    break;
                     case 'R':
                     kill(fill,SIGINT);
                     bucle++;
@@ -86,20 +95,29 @@ while (endFlag == 1)
 
                 }
                 waitpid(fill,&status,WUNTRACED);
-                if(WEXITSTATUS(status) == 7)
+                int contador = 4;
+                while(contador != 0)
                 {
-                    bucle++;
-                    sprintf(s, "%s!!!!Pokemon escaped! %s\n", KYEL, KNRM);
-                    printf("%s",s);
+                    a = arrayBerry[contador-1];
+                    printf("%d",a);
+                    if(WEXITSTATUS(status) == a)
+                    {
+                        bucle++;
+                        sprintf(s, "%s!!!!Pokemon captured! %s\n", KGRN, KNRM);
+                        printf("%s",s); 
+                        contador = 1;
+                    }
+                contador--;
                 }
-                else if(WEXITSTATUS(status) == 2)
-                {
-                    bucle++;
-                    printf("Pokemon has been captured!\n"); 
-                }
-                else{
-                    kill(fill, SIGCONT);
-                }
+                    if(WEXITSTATUS(status) == 7)
+                    {
+                        bucle++;
+                        sprintf(s, "%s!!!!Pokemon escaped! %s\n", KYEL, KNRM);
+                        printf("%s",s);
+                    }
+                    else{
+                        kill(fill, SIGCONT);
+                    }
 
             }
         }

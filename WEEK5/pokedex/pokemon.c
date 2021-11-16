@@ -26,16 +26,12 @@ int legendary;
     
     printf("Enter pokemon id: ");
     scanf("%d", newP.pokemon_id);
-
     printf("Enter pokemon name: ");
     scanf("%s", newP.pokemon_name);
-
     printf("Enter pokemon height: ");
     scanf("%lf", newP.pokemon_height);
-
     printf("Enter pokemon weight: ");
     scanf("%d", newP.pokemon_weight);
-
     sprintf(f, newP.pokemon_id()),strlen(newP.pokemon_id());
     sprintf(f, ",");
     sprintf(f, newP.pokemon_name(),strlen(newP.pokemon_name()));
@@ -64,7 +60,7 @@ Pokemon new_pokemon(int id, char *name, int hp,int attack,int defense,int spAtta
     
 }
 
-int id(Pokemon pokemon)
+int pokemon_id(Pokemon pokemon)
 {
     return pokemon->id;
 }
