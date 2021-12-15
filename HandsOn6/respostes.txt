@@ -1,0 +1,38 @@
+ACT1
+
+-En el primer codi, el fork esta damunt el open i per tant es fan 2 fitxers i en cada un
+s'escriu 'so' i salt de linea. En el segon codi es crea només un fitxer i s'scriu so 2 
+vegades en el mateix fitxer.En el segon cas com que fd sira només un ja que només sha 
+creat un fitxer es farà un append.
+
+ACT2
+
+-act2.c
+
+ACT3
+
+-A un directori root que es diu NPFS.No.
+
+ACT4
+
+-Sortida std del pipe de el fill al pare msg1. i msg2 .Tanca la sortida de la pipe.
+Fara un printf si dins el buffer que sirà la entrada del pare de la pipe, ens escriura
+que tenim un misstge.Llavors ens dira que no tenim res més i tancarà la pipe de entrada de 
+el pare. zSi desconectem, al pare no li arriba la infrmacó escrita a la string per el fill
+ja que és el mateix fill el que el tanca.
+
+ACT5
+
+-act5.c
+
+ACT6
+
+-act6.c
+
+ACT7
+
+-carpeta act7
+
+ACTIVITAT FINAL
+
+-carpeta pokemongo

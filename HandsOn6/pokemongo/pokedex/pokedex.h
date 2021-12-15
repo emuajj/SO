@@ -1,5 +1,3 @@
-
-
 #ifndef _POKEDEX_H_
 #define _POKEDEX_H_
 
