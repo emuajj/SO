@@ -1,0 +1,8 @@
+-Assigna a la variable N el que hi ha al primer argument
+-Les variables coplete i fail tenen assignat el valor 0
+-El 'echo' ens indica el pid del procés actual
+-Pids és una variable string buida
+-El for executa el nombre de vegades que el usuari li pasa amb largument
+-Aquest p.sh fabrica processos i ens dona la data i el pid del procés
+-Llavors fa un sleep  de entre 0 i 21 i torna al shell
+-Al final ens compta els processos que han acabat exitosament amb el contador complete i l'imprimeix , i el mateix amb els que han fallat.
